@@ -6,6 +6,7 @@ import json
 from datetime import datetime
 from PIL import Image
 import re
+st.set_page_config(page_title="Parna's Meal Tracker", page_icon="🥗")
 
 # --- 1. CONFIGURATION ---
 GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
