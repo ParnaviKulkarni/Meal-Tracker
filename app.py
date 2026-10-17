@@ -139,7 +139,7 @@ with tab1:
                 """
                 
                 try:
-                    response = client.model.generate_content(model=model,contents=[prompt, img])
+                    response = client.models.generate_content(model=model,contents=[prompt, img])
                     result_text = response.text.strip().replace('```json', '').replace('```', '')
                     nutrition_data = json.loads(result_text)
                     
