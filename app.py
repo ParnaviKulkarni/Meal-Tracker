@@ -9,7 +9,6 @@ import re
 
 # --- 1. CONFIGURATION ---
 GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
-GOOGLE_SHEETS_CREDENTIALS_FILE = "service_account.json" 
 SPREADSHEET_ID = st.secrets["SPREADSHEET_ID"]
 
 client = genai.Client(api_key=GEMINI_API_KEY)
@@ -18,7 +17,8 @@ model = st.secrets["MODEL_STRING"]
 @st.cache_resource
 def get_google_sheet():
     scopes = ["https://www.googleapis.com/auth/spreadsheets"]
-    creds = Credentials.from_service_account_file(GOOGLE_SHEETS_CREDENTIALS_FILE, scopes=scopes)
+    creds_dict = dict(st.secrets["gcp_service_account"])
+    creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
     client = gspread.authorize(creds)
     return client.open_by_key(SPREADSHEET_ID).sheet1
 
